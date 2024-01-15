@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./pages/Home";
+import AppContext from "./utils/AppContext";
+import { useState } from "react";
 
 function App() {
+
+  const imageInfo = JSON.parse(localStorage.getItem("info")) || []
+  const [section, setSection] = useState('upload')
+  const [info, setInfo] = useState(imageInfo)
+
+  const value = {
+    section,
+    setSection,
+    info,
+    setInfo
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <AppContext.Provider value = {value}>
+        <Home />
+      </AppContext.Provider>
   );
 }
 
